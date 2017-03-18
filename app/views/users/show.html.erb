@@ -1,9 +1,7 @@
-<h2>Hello, <%= current_user.email %></h2>
+<center><h2>Hello, <%= current_user.email %></h2>
 
-<p><%= link_to "Add Restaurant", new_user_restaurant_path(current_user), class: 'btn btn-outline-primary' %></p>
+<p>How would you like to view your plans?</p>
 
-Here are all of your planned restaurants:
-
-<% current_user.restaurants.each do |restaurant| %>
-  <%= link_to restaurant.name, user_restaurant_path(restaurant) %>
-<% end %>
+<p><%= link_to "Sorted By Restaurant", user_restaurants_path(current_user), class: 'btn btn-primary' %>
+  <%= link_to "Sorted By Menu Item", user_foods_path(current_user), class: 'btn btn-primary' %></p>
+</center>

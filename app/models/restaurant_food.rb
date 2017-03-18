@@ -1,4 +1,4 @@
 class RestaurantFood < ApplicationRecord
-  belongs_to :restaurant
-  belongs_to :food
+  belongs_to :restaurant, optional: true
+  belongs_to :food, optional: true
 end

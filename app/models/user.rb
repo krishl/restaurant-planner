@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable
   has_many :restaurants
+  has_many :foods, through: :restaurants
 
 
   def self.from_omniauth(auth)

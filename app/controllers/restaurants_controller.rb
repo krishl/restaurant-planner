@@ -17,31 +17,25 @@ class RestaurantsController < ApplicationController
 
   def create
     @restaurant = Restaurant.new(restaurant_params)
-
-    respond_to do |format|
-      if @restaurant.save
-        format.html { redirect_to @restaurant, notice: 'Restaurant was successfully created.' }
-      else
-        format.html { render :new }
-      end
+    if @restaurant.save
+      redirect_to user_restaurant_path(current_user, @restaurant), notice: 'Restaurant was successfully created.'
+    else
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @restaurant.update(restaurant_params)
-        format.html { redirect_to @restaurant, notice: 'Restaurant was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+    @restaurant.update(restaurant_params)
+    if @restaurant.save
+      redirect_to user_restaurant_path(@restaurant), notice: 'Restaurant was successfully updated.'
+    else
+      render :edit
     end
   end
 
   def destroy
     @restaurant.destroy
-    respond_to do |format|
-      format.html { redirect_to restaurants_url, notice: 'Restaurant was successfully destroyed.' }
-    end
+      redirect_to user_restaurants_url, notice: 'Restaurant was successfully destroyed.'
   end
 
   private
@@ -50,6 +44,6 @@ class RestaurantsController < ApplicationController
     end
 
     def restaurant_params
-      params.require(:restaurant).permit(:name, :address, :borough, :phone, :cuisine)
+      params.require(:restaurant).permit(:name, :address, :phone, :cuisine, foods_attributes: [:id, :name, :price])
     end
 end
