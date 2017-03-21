@@ -33,7 +33,7 @@
   </div>
 
   <h3>Menu Items to Try</h3>
-  <p><%= f.collection_check_boxes :food_ids, Food.all, :id, :name %></p>
+   <p><%= f.collection_check_boxes :food_ids, Food.all, :id, :name %></p>
 
   <% 3.times do %>
     <%= f.fields_for :foods, @restaurant.foods.build do |g| %>
@@ -46,8 +46,8 @@
         <%= g.label :price %>
         <%= g.number_field :price, :step => 0.01 %>
       </div>
-    <% end %>
     <br>
+    <% end %>
   <% end %>
 
   <div class="actions">

@@ -7,7 +7,7 @@
 
 <p>
   <strong>Price:</strong>
-  <%= @food.price %>
+  <%= number_to_currency(@food.price) %>
 </p>
 
 <%= link_to 'Edit', edit_food_path(@food) %> |

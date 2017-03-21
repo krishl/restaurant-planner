@@ -22,8 +22,8 @@
 
 <h3>Menu Items To Try</h3>
 <ul>
-  <% @restaurant.foods.each do |food| %>
-    <li><%= food.name %> <%= number_to_currency(food.price) %></li>
+  <% @restaurant.foods.all.each do |food| %>
+    <li><%= food.name %> - <%= number_to_currency(food.price) %></li>
   <% end %>
 </ul>
 <%= link_to 'Edit', edit_user_restaurant_path(current_user, @restaurant) %> |
