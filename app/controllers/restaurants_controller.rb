@@ -18,6 +18,14 @@ class RestaurantsController < ApplicationController
   def create
     @restaurant = Restaurant.new(restaurant_params)
     if @restaurant.save
+      restaurant_params[:foods_attributes].each do |food|
+        if restaurant_params[:foods_attributes][food][:name] != ""
+          food_name = Food.find_by(name: restaurant_params[:foods_attributes][food][:name])
+          restaurant_food = RestaurantFood.find_by(restaurant_id: @restaurant.id, food_id: food_name.id)
+          restaurant_food.price = restaurant_params[:foods_attributes][food][:restaurant_foods_attributes]["0"][:price]
+          restaurant_food.save
+        end
+      end
       redirect_to user_restaurant_path(current_user, @restaurant), notice: 'Restaurant was successfully created.'
     else
       render :new
@@ -35,7 +43,7 @@ class RestaurantsController < ApplicationController
 
   def destroy
     @restaurant.destroy
-      redirect_to user_restaurants_url, notice: 'Restaurant was successfully destroyed.'
+    redirect_to user_restaurants_url, notice: 'Restaurant was successfully deleted.'
   end
 
   private
@@ -44,6 +52,6 @@ class RestaurantsController < ApplicationController
     end
 
     def restaurant_params
-      params.require(:restaurant).permit(:name, :address, :phone, :cuisine, :user_id, food_ids: [], foods_attributes: [:id, :name, :price])
+      params.require(:restaurant).permit(:name, :address, :phone, :cuisine, :user_id, food_ids: [], foods_attributes: [:id, :name, restaurant_foods_attributes: [:price]])
     end
 end

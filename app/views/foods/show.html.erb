@@ -5,17 +5,12 @@
   <%= @food.name %>
 </p>
 
-<p>
-  <strong>Price:</strong>
-  <%= number_to_currency(@food.price) %>
-</p>
-
 <h3>This is planned to be ordered at:</h3>
 <ul>
   <% @food.restaurants.all.each do |restaurant| %>
-    <li><%= link_to restaurant.name, user_restaurant_path(current_user) %></li>
+    <li><%= link_to restaurant.name, user_restaurant_path(current_user, restaurant.id) %></li>
   <% end %>
 </ul>
 
-<%= link_to 'Edit', edit_food_path(@food) %> |
-<%= link_to 'Back', foods_path %>
+<%= link_to 'Edit', edit_user_food_path(current_user, @food) %> |
+<%= link_to 'Back', user_foods_path %>

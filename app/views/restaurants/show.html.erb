@@ -1,8 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
-  <%= @restaurant.name %>
+  <h1><%= @restaurant.name %></h1>
 </p>
 
 <p>
@@ -25,7 +24,7 @@
 <h3>Menu Items To Try</h3>
 <ul>
   <% @restaurant.foods.all.each do |food| %>
-    <li><%= link_to food.name, food_path %> <%= number_to_currency(food.price) %></li>
+    <li><%= link_to food.name, user_food_path(food) %> <%= number_to_currency(RestaurantFood.find_by(restaurant_id: @restaurant.id, food_id: food.id).price) %></li>
   <% end %>
 </ul>
 <%= link_to 'Edit', edit_user_restaurant_path(current_user, @restaurant) %> |

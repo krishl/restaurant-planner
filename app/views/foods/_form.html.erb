@@ -1,4 +1,4 @@
-<%= form_for(food) do |f| %>
+<%= form_for([current_user, @food]) do |f| %>
   <% if food.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(food.errors.count, "error") %> prohibited this food from being saved:</h2>
@@ -16,10 +16,38 @@
     <%= f.text_field :name %>
   </div>
 
-  <div class="field">
-    <%= f.label :price %>
-    <%= f.text_field :price %>
-  </div>
+  <h3>Restaurants To Try This At</h3>
+   <p><%= f.collection_check_boxes :restaurant_ids, Restaurant.all, :id, :name %></p>
+
+  <%= f.fields_for :restaurant, @food.restaurants.build do |g| %>
+    <div class="field">
+      <%= g.label :name %>
+      <%= g.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= g.label :address %>
+      <%= g.text_field :address %>
+    </div>
+
+    <div class="field">
+      <%= g.label :phone %>
+      <%= g.text_field :phone %>
+    </div>
+
+    <div class="field">
+      <%= g.label :cuisine %>
+      <%= g.text_field :cuisine %>
+    </div>
+    <br>
+    <%= g.fields_for :restaurant_foods, @food.restaurant_foods.build do |h| %>
+      <div class="field">
+        <%= h.label :price %>
+        <%= h.number_field :price, :step => 0.01 %>
+      </div>
+    <% end %>
+  <br>
+  <% end %>
 
   <div class="actions">
     <%= f.submit %>

@@ -41,11 +41,12 @@
         <%= g.label :name %>
         <%= g.text_field :name %>
       </div>
-
+      <%= g.fields_for :restaurant_foods, @restaurant.restaurant_foods.build do |h| %>
       <div class="field">
-        <%= g.label :price %>
-        <%= g.number_field :price, :step => 0.01 %>
+        <%= h.label :price %>
+        <%= h.number_field :price, :step => 0.01 %>
       </div>
+      <% end %>
     <br>
     <% end %>
   <% end %>
