@@ -1,14 +1,11 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @food.name %>
-</p>
+<h1><%= @food.name %></h1>
 
 <h3>This is planned to be ordered at:</h3>
 <ul>
   <% @food.restaurants.all.each do |restaurant| %>
-    <li><%= link_to restaurant.name, user_restaurant_path(current_user, restaurant.id) %></li>
+    <li><%= link_to restaurant.name, user_restaurant_path(current_user, restaurant.id) %> <%= number_to_currency(RestaurantFood.find_by(restaurant_id: restaurant.id, food_id: @food.id).price) %></li>
   <% end %>
 </ul>
 

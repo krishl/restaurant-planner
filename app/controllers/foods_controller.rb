@@ -35,7 +35,7 @@ class FoodsController < ApplicationController
   def update
     @food.update(food_params)
     if @food.save
-      redirect_to user_food_path(@food), notice: 'Menu item was successfully updated.'
+      redirect_to user_food_path(current_user, @food), notice: 'Menu item was successfully updated.'
     else
       render :edit
     end
@@ -52,6 +52,6 @@ class FoodsController < ApplicationController
     end
 
     def food_params
-      params.require(:food).permit(:name, :price, restaurant_params: [:name, :address, :phone, :cuisine, :user_id, food_ids: [], restaurant_foods_attributes: [:price]])
+      params.require(:food).permit(:name, restaurant_ids: [], restaurants_attributes: [:name, :address, :phone, :cuisine, :user_id, restaurant_foods_attributes: [:price]])
     end
 end

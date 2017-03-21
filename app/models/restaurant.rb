@@ -14,4 +14,10 @@ class Restaurant < ApplicationRecord
       end
     end
   end
+
+  def destroy_if_orphaned
+    if foods.count == 0
+      self.destroy
+    end
+  end
 end
