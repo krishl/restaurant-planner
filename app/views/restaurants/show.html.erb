@@ -20,10 +20,12 @@
   <%= @restaurant.cuisine %>
 </p>
 
+<%= link_to "View on Google Maps", "https://www.google.com/maps/search/#{@restaurant.address}" %>
+
 <h3>Menu Items To Try</h3>
 <ul>
   <% @restaurant.foods.all.each do |food| %>
-    <li><%= food.name %> - <%= number_to_currency(food.price) %></li>
+    <li><%= link_to food.name, food_path %> <%= number_to_currency(food.price) %></li>
   <% end %>
 </ul>
 <%= link_to 'Edit', edit_user_restaurant_path(current_user, @restaurant) %> |
