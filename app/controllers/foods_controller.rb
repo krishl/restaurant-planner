@@ -21,7 +21,7 @@ class FoodsController < ApplicationController
       food_params[:restaurants_attributes].each do |restaurant|
         if food_params[:restaurants_attributes][restaurant][:name] != ""
           restaurant_name = Restaurant.find_by(name: food_params[:restaurants_attributes][restaurant][:name])
-          restaurant_food = RestaurantFood.find_by(restaurant_id: restaurant.id, food_id: @food_name.id)
+          restaurant_food = RestaurantFood.find_by(restaurant_id: restaurant_name.id, food_id: @food.id)
           restaurant_food.price = food_params[:restaurants_attributes][restaurant][:restaurant_foods_attributes]["0"][:price]
           restaurant_food.save
         end
@@ -43,7 +43,7 @@ class FoodsController < ApplicationController
 
   def destroy
     @food.destroy
-    redirect_to user_restaurants_url, notice: 'Menu item was successfully deleted.'
+    redirect_to user_foods_path, notice: 'Menu item was successfully deleted.'
   end
 
   private
@@ -52,6 +52,6 @@ class FoodsController < ApplicationController
     end
 
     def food_params
-      params.require(:food).permit(:name, restaurant_ids: [], restaurants_attributes: [:name, :address, :phone, :cuisine, :user_id, restaurant_foods_attributes: [:price]])
+      params.require(:food).permit(:name, restaurant_ids: [], restaurants_attributes: [:id, :name, :address, :phone, :cuisine, :user_id, restaurant_foods_attributes: [:price]])
     end
 end
