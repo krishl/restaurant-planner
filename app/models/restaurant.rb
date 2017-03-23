@@ -4,7 +4,7 @@ class Restaurant < ApplicationRecord
   has_many :foods, through: :restaurant_foods
   accepts_nested_attributes_for :foods, :restaurant_foods, :reject_if => proc {|attributes|
     attributes.all? {|k,v| v.blank?}}, allow_destroy: true
-  validates_presence_of :name
+  validates :name, uniqueness: true, presence: true
 
   def foods_attributes=(foods_attributes)
     foods_attributes.values.each do |foods_attribute|
