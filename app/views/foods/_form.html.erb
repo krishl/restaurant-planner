@@ -17,7 +17,6 @@
   </div>
 
   <h3>Restaurants To Try This At</h3>
-   <p><%= f.collection_check_boxes :restaurant_ids, Restaurant.all, :id, :name %></p>
 
   <%= f.fields_for :restaurants, @food.restaurants.build do |g| %>
     <div class="field">
@@ -47,6 +46,11 @@
       </div>
     <% end %>
   <br>
+  <% end %>
+
+  <% if @food.restaurants.exists? %>
+    <i>Uncheck restaurant(s) to remove from <%= @food.name %></i>
+      <p><%= f.collection_check_boxes :restaurant_ids, @food.restaurants.all, :id, :name %></p>
   <% end %>
 
   <div class="actions">

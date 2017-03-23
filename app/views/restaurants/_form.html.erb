@@ -33,7 +33,6 @@
   </div>
 
   <h3>Menu Items to Try</h3>
-   <p><%= f.collection_check_boxes :food_ids, Food.all, :id, :name %></p>
 
   <% 3.times do %>
     <%= f.fields_for :foods, @restaurant.foods.build do |g| %>
@@ -49,6 +48,11 @@
       <% end %>
     <br>
     <% end %>
+  <% end %>
+
+  <% if @restaurant.foods.exists? %>
+    <i>Uncheck menu item(s) to remove from <%= @restaurant.name %></i>
+    <p><%= f.collection_check_boxes :food_ids, @restaurant.foods.all, :id, :name %></p>
   <% end %>
 
   <div class="actions">
