@@ -12,10 +12,10 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %>
+    <font color="red">*</font><%= f.label :name %>
     <%= f.text_field :name %>
   </div>
-
+  <hr>
   <h3>Restaurants To Try This At</h3>
 
   <%= f.fields_for :restaurants, @food.restaurants.build do |g| %>

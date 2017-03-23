@@ -13,7 +13,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %>
+    <font color="red">*</font><%= f.label :name %>
     <%= f.text_field :name %>
   </div>
 
@@ -31,7 +31,7 @@
     <%= f.label :cuisine %>
     <%= f.text_field :cuisine %>
   </div>
-
+  <hr>
   <h3>Menu Items to Try</h3>
 
   <% 3.times do %>
