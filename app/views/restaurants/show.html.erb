@@ -22,12 +22,18 @@
 <%= link_to "View on Google Maps", "https://www.google.com/maps/search/#{@restaurant.address}" %>
 
 <h3>Menu Items To Try</h3>
-<ul>
-  <% @restaurant.foods.all.each do |food| %>
-    <li><%= link_to food.name, user_food_path(current_user, food) %>
-      <%= number_to_currency(RestaurantFood.find_by(restaurant_id: @restaurant.id, food_id: food.id).price) %>
-    </li>
-  <% end %>
-</ul>
+
+<% if @restaurant.foods.exists? %>
+  <ul>
+    <% @restaurant.foods.all.each do |food| %>
+      <li><%= link_to food.name, user_food_path(current_user, food) %>
+        <%= number_to_currency(RestaurantFood.find_by(restaurant_id: @restaurant.id, food_id: food.id).price) %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+    <p><i>Currently, you do not have any menu plans at <%= @restaurant.name %>.</i></p>
+<% end %>
+
 <%= link_to 'Edit', edit_user_restaurant_path(current_user, @restaurant) %> |
 <%= link_to 'Back', user_restaurants_path %>
