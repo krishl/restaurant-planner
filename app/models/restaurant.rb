@@ -1,7 +1,7 @@
 class Restaurant < ApplicationRecord
   belongs_to :user, optional: true
   has_many :restaurant_foods, dependent: :destroy
-  has_many :foods, through: :restaurant_foods
+  has_many :foods,   -> { distinct }, through: :restaurant_foods
   accepts_nested_attributes_for :foods, :restaurant_foods, :reject_if => proc {|attributes|
     attributes.all? {|k,v| v.blank?}}, allow_destroy: true
   validates :name, presence: true
@@ -17,7 +17,7 @@ class Restaurant < ApplicationRecord
   end
 
   def destroy_if_orphaned
-    if foods.count == 0
+    if self.foods.count == 0
       self.destroy
     end
   end

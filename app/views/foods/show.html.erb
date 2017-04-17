@@ -6,7 +6,7 @@
 <% if @food.restaurants.exists? %>
   <ul>
     <% @food.restaurants.all.each do |restaurant| %>
-      <li><%= link_to restaurant.name, user_restaurant_path(current_user, restaurant.id) %> <%= number_to_currency(RestaurantFood.find_by(restaurant_id: restaurant.id, food_id: @food.id).price) %></li>
+      <li><%= link_to restaurant.name, user_restaurant_path(current_user, restaurant.id) %> <%= number_to_currency(RestaurantFood.find_by(restaurant_id: restaurant.id, food_id: @food.id).price) %> | <%= link_to 'Delete', restaurant_food_path((RestaurantFood.find_by(restaurant_id: restaurant.id, food_id: @food.id)).id), method: :delete, data: { confirm: 'Are you sure?' } %></li>
     <% end %>
   </ul>
 <% else %>

@@ -43,16 +43,11 @@
       <%= g.fields_for :restaurant_foods, @restaurant.restaurant_foods.build do |h| %>
       <div class="field">
         <%= h.label :price %>
-        <%= h.number_field :price, :step => 0.01 %>
+        <%= h.number_field :price, :step => 0.01, :min => 0 %>
       </div>
       <% end %>
     <br>
     <% end %>
-  <% end %>
-
-  <% if @restaurant.foods.exists? %>
-    <i>Uncheck menu item(s) to remove from <%= @restaurant.name %></i>
-    <p><%= f.collection_check_boxes :food_ids, @restaurant.foods.all, :id, :name %></p>
   <% end %>
 
   <div class="actions">

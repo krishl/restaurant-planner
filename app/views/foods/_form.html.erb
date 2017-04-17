@@ -16,9 +16,10 @@
     <%= f.text_field :name %>
   </div>
   <hr>
-  <h3>Restaurants To Try This At</h3>
+  <h3>Add Restaurant To Try This At</h3>
 
   <%= f.fields_for :restaurants, @food.restaurants.build do |g| %>
+  <%= g.hidden_field :user_id, :value => current_user.id %>
     <div class="field">
       <%= g.label :name %>
       <%= g.text_field :name %>
@@ -42,15 +43,10 @@
     <%= g.fields_for :restaurant_foods, @food.restaurant_foods.build do |h| %>
       <div class="field">
         <%= h.label :price %>
-        <%= h.number_field :price, :step => 0.01 %>
+        <%= h.number_field :price, :step => 0.01, :min => 0 %>
       </div>
     <% end %>
   <br>
-  <% end %>
-
-  <% if @food.restaurants.exists? %>
-    <i>Uncheck restaurant(s) to remove from <%= @food.name %></i>
-      <p><%= f.collection_check_boxes :restaurant_ids, @food.restaurants.all, :id, :name %></p>
   <% end %>
 
   <div class="actions">

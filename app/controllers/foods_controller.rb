@@ -4,7 +4,7 @@ class FoodsController < ApplicationController
   before_action :require_permission
 
   def index
-    @foods = current_user.foods
+    @foods = current_user.foods.uniq
   end
 
   def show
@@ -62,7 +62,7 @@ class FoodsController < ApplicationController
     end
 
     def food_params
-      params.require(:food).permit(:name, restaurant_ids: [], restaurants_attributes: [:id, :name, :address, :phone, :cuisine, :user_id, restaurant_foods_attributes: [:price]])
+      params.require(:food).permit(:name, :user_id, restaurant_ids: [], restaurants_attributes: [:id, :name, :address, :phone, :cuisine, :user_id, restaurant_foods_attributes: [:price]])
     end
 
     def require_permission

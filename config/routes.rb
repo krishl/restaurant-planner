@@ -6,4 +6,6 @@ Rails.application.routes.draw do
     resources :restaurants
     resources :foods
   end
+
+  resources :restaurant_foods, only: [:destroy]
 end
