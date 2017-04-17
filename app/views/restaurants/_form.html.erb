@@ -36,6 +36,7 @@
 
   <% 3.times do %>
     <%= f.fields_for :foods, @restaurant.foods.build do |g| %>
+      <%= g.hidden_field :user_id, :value => current_user.id %>
       <div class="field">
         <%= g.label :name %>
         <%= g.text_field :name %>

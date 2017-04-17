@@ -4,7 +4,7 @@ class FoodsController < ApplicationController
   before_action :require_permission
 
   def index
-    @foods = current_user.foods.uniq
+    @foods = current_user.foods
   end
 
   def show
