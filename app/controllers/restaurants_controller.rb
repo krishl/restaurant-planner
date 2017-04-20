@@ -1,7 +1,5 @@
 class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
-  before_action :require_permission
 
   def index
     @restaurants = current_user.restaurants
@@ -63,9 +61,5 @@ class RestaurantsController < ApplicationController
 
     def restaurant_params
       params.require(:restaurant).permit(:name, :address, :phone, :cuisine, :user_id, food_ids: [], foods_attributes: [:id, :user_id, :name, restaurant_foods_attributes: [:price]])
-    end
-
-    def require_permission
-      redirect_to root_path, alert: "Access denied." unless params[:user_id].to_i == current_user.id
     end
 end

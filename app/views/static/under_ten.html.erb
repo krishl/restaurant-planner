@@ -1,0 +1,10 @@
+<h2>Planned Menu Items $10 and Under</h2>
+<ul>
+  <% if @under_ten %>
+    <% @under_ten.each do |ut| %>
+      <li><%= link_to ut.food.name, user_food_path(current_user, ut.food) %> for <%= number_to_currency(ut.price) %> at <%= link_to ut.restaurant.name, user_restaurant_path(current_user, ut.restaurant) %></li>
+    <% end %>
+  <% else %>
+    You do not have any planned menu items under $10 to try.
+  <% end %>
+</ul>

@@ -7,7 +7,7 @@ Specs:
 - [x] Include at least one has_many through relationship (x has_many y through z e.g. Recipe has_many Items through Ingredients) | Restaurants has_many Foods through Restaurant_Foods, Foods has_many Restaurants through Restaurant_Foods
 - [x] The "through" part of the has_many through includes at least one user submittable attribute (attribute_name e.g. ingredients.quantity) | restaurant_foods.price
 - [x] Include reasonable validations for simple model objects (list of model objects with validations e.g. User, Recipe, Ingredient, Item) | Food, Restaurant, and Restaurant_Food have validations
-- [ ] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes)
+- [x] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes) | /users/under_ten
 - [x] Include a nested form writing to an associated model using a custom attribute writer (form URL, model name e.g. /recipe/new, Item) | users/1/restaurants/new, Food
 - [x] Include signup (how e.g. Devise) | Devise
 - [x] Include login (how e.g. Devise) | Devise

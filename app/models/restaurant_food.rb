@@ -11,4 +11,10 @@ class RestaurantFood < ApplicationRecord
   def check_restaurant
     restaurant.destroy_if_orphaned if restaurant
   end
+
+  def self.under_ten
+    self.all.select do |restaurant_food|
+      restaurant_food if restaurant_food.price <= 10
+    end
+  end
 end

@@ -13,7 +13,7 @@
       <% @foods.each do |food| %>
         <tr>
           <td><%= link_to food.name, user_food_path(current_user, food) %></td>
-          <td><%= link_to 'Delete', user_food_path(current_user, food), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Remove All', user_food_path(current_user, food), method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
     </tbody>
