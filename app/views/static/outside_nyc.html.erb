@@ -2,12 +2,7 @@
 <ul>
   <% if @outsidenyc.present? %>
     <% @outsidenyc.each do |restaurant| %>
-      <li><b><%= link_to restaurant.name, user_restaurant_path(current_user, restaurant) %></b>
-        <br> <%= restaurant.address %> <br> <%= restaurant.cuisine %> <br>
-        <% restaurant.foods.each do |food| %>
-          <%= link_to food.name, user_food_path(current_user, food) %> <%= number_to_currency(RestaurantFood.find_by(restaurant_id: restaurant.id, food_id: food.id).price) %><br>
-        <% end %>
-      </li>
+      <%= render 'borough_restaurants', restaurant: restaurant %>
     <% end %>
   <% else %>
     You do not have any planned restaurants outside NYC to try.
