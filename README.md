@@ -7,7 +7,7 @@ This is an tool designed for food explorers who would like an easier way to keep
 2. Navigate to Restaurant Planner's folder in your Terminal
 3. Run `bundle install`
 4. Run `rails s`
-5. Open the url given by `shotgun` in your internet browser.
+5. Open the resulting url in your internet browser.
 
 ## Contributing
 
