@@ -17,20 +17,20 @@ class FoodsController < ApplicationController
   end
 
   def create
-    food = Food.new(food_params)
-    if food.save
-      Food.save_food(food, food_params)
-      redirect_to user_food_path(current_user, food), notice: 'Menu item was successfully created.'
+    @food = Food.new(food_params)
+    if @food.save
+      Food.save_food(@food, food_params)
+      redirect_to user_food_path(current_user, @food), notice: 'Menu item was successfully created.'
     else
       render :new
     end
   end
 
   def update
-    food.update(food_params)
-    if food.save
-      Food.save_food(food, food_params)
-      redirect_to user_food_path(current_user, food), notice: 'Menu item was successfully updated.'
+    @food.update(food_params)
+    if @food.save
+      Food.save_food(@food, food_params)
+      redirect_to user_food_path(current_user, @food), notice: 'Menu item was successfully updated.'
     else
       render :edit
     end

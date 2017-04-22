@@ -18,20 +18,20 @@ class RestaurantsController < ApplicationController
   end
 
   def create
-    restaurant = Restaurant.new(restaurant_params)
-    if restaurant.save
-      Restaurant.save_restaurant(restaurant, restaurant_params)
-      redirect_to user_restaurant_path(current_user, restaurant), notice: 'Restaurant was successfully created.'
+    @restaurant = Restaurant.new(restaurant_params)
+    if @restaurant.save
+      Restaurant.save_restaurant(@restaurant, restaurant_params)
+      redirect_to user_restaurant_path(current_user, @restaurant), notice: 'Restaurant was successfully created.'
     else
       render :new
     end
   end
 
   def update
-    restaurant.update(restaurant_params)
-    if restaurant.save
-      Restaurant.save_restaurant(restaurant, restaurant_params)
-      redirect_to user_restaurant_path(current_user, restaurant), notice: 'Restaurant was successfully updated.'
+    @restaurant.update(restaurant_params)
+    if @restaurant.save
+      Restaurant.save_restaurant(@restaurant, restaurant_params)
+      redirect_to user_restaurant_path(current_user, @restaurant), notice: 'Restaurant was successfully updated.'
     else
       render :edit
     end
@@ -43,27 +43,27 @@ class RestaurantsController < ApplicationController
   end
 
   def manhattan
-    @manhattan = set_borough('manhattan')
+    @manhattan = set_borough('Manhattan')
   end
 
   def brooklyn
-    @brooklyn = set_borough('brooklyn')
+    @brooklyn = set_borough('Brooklyn')
   end
 
   def queens
-    @queens = set_borough('queens')
+    @queens = set_borough('Queens')
   end
 
   def bronx
-    @bronx = set_borough('the bronx')
+    @bronx = set_borough('The Bronx')
   end
 
   def staten_island
-    @statenisland = set_borough('staten island')
+    @statenisland = set_borough('Staten Island')
   end
 
   def outside_nyc
-    @outsidenyc = set_borough('outside nyc')
+    @outsidenyc = set_borough('Outside NYC')
   end
 
   private
