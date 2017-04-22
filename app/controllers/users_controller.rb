@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :require_user
-  skip_before_action :require_permission, raise: false
 
   def show
   end

@@ -20,4 +20,15 @@ class Food < ApplicationRecord
       self.destroy
     end
   end
+
+  def self.save_food(food, food_params)
+    food_params[:restaurants_attributes].each do |restaurant|
+      if food_params[:restaurants_attributes][restaurant][:name] != ""
+        restaurant_name = Restaurant.find_by(name: food_params[:restaurants_attributes][restaurant][:name])
+        restaurant_food = RestaurantFood.find_by(restaurant_id: restaurant_name.id, food_id: food.id)
+        restaurant_food.price = food_params[:restaurants_attributes][restaurant][:restaurant_foods_attributes]["0"][:price]
+        restaurant_food.save
+      end
+    end
+  end
 end

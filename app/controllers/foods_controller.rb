@@ -1,5 +1,6 @@
 class FoodsController < ApplicationController
   before_action :set_food, only: [:show, :edit, :update, :destroy]
+  before_action :require_permission
 
   def index
     @foods = current_user.foods
@@ -16,34 +17,20 @@ class FoodsController < ApplicationController
   end
 
   def create
-    @food = Food.new(food_params)
-    if @food.save
-      food_params[:restaurants_attributes].each do |restaurant|
-        if food_params[:restaurants_attributes][restaurant][:name] != ""
-          restaurant_name = Restaurant.find_by(name: food_params[:restaurants_attributes][restaurant][:name])
-          restaurant_food = RestaurantFood.find_by(restaurant_id: restaurant_name.id, food_id: @food.id)
-          restaurant_food.price = food_params[:restaurants_attributes][restaurant][:restaurant_foods_attributes]["0"][:price]
-          restaurant_food.save
-        end
-      end
-      redirect_to user_food_path(current_user, @food), notice: 'Menu item was successfully created.'
+    food = Food.new(food_params)
+    if food.save
+      Food.save_food(food, food_params)
+      redirect_to user_food_path(current_user, food), notice: 'Menu item was successfully created.'
     else
       render :new
     end
   end
 
   def update
-    @food.update(food_params)
-    if @food.save
-      food_params[:restaurants_attributes].each do |restaurant|
-        if food_params[:restaurants_attributes][restaurant][:name] != ""
-          restaurant_name = Restaurant.find_by(name: food_params[:restaurants_attributes][restaurant][:name])
-          restaurant_food = RestaurantFood.find_by(restaurant_id: restaurant_name.id, food_id: @food.id)
-          restaurant_food.price = food_params[:restaurants_attributes][restaurant][:restaurant_foods_attributes]["0"][:price]
-          restaurant_food.save
-        end
-      end
-      redirect_to user_food_path(current_user, @food), notice: 'Menu item was successfully updated.'
+    food.update(food_params)
+    if food.save
+      Food.save_food(food, food_params)
+      redirect_to user_food_path(current_user, food), notice: 'Menu item was successfully updated.'
     else
       render :edit
     end
