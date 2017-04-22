@@ -28,8 +28,8 @@ class Restaurant < ApplicationRecord
   def self.save_restaurant(restaurant, restaurant_params)
     restaurant_params[:foods_attributes].each do |food|
       if restaurant_params[:foods_attributes][food][:name] != ""
-        food_name = Food.find_by(name: restaurant_params[:foods_attributes][food][:name])
-        restaurant_food = RestaurantFood.find_by(restaurant_id: restaurant.id, food_id: food_name.id)
+        food_name = Food.find_or_create_by(name: restaurant_params[:foods_attributes][food][:name])
+        restaurant_food = RestaurantFood.find_or_create_by(restaurant_id: restaurant.id, food_id: food_name.id)
         restaurant_food.price = restaurant_params[:foods_attributes][food][:restaurant_foods_attributes]["0"][:price]
         restaurant_food.save
       end
