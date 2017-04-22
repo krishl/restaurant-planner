@@ -5,7 +5,7 @@
       <li><b><%= link_to ut.name, user_food_path(current_user, ut) %></b><br>
       <% ut.restaurants.each do |restaurant| %>
         <% if RestaurantFood.find_by(restaurant_id: restaurant.id, food_id: ut.id).price <= 10 %>
-          <%= link_to restaurant.name, user_restaurant_path(current_user, restaurant) %> <%= number_to_currency(RestaurantFood.find_by(restaurant_id: restaurant.id, food_id: ut.id).price) %><br> </li>
+          <%= link_to restaurant.name, user_restaurant_path(current_user, restaurant) %> <%= number_to_currency(RestaurantFood.find_by(restaurant_id: restaurant.id, food_id: ut.id).price) %><br>
         <% end %>
       <% end %>
       </li>

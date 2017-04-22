@@ -37,7 +37,7 @@
     <%= f.select :borough, ['', 'Brooklyn', 'The Bronx', 'Manhattan', 'Queens', 'Staten Island', 'Outside NYC'] %>
   </div>
   <hr>
-  <h3>Menu Items to Try</h3>
+  <h3>Add Menu Items to Try</h3>
 
   <% 3.times do %>
     <%= f.fields_for :foods, @restaurant.foods.build do |g| %>
