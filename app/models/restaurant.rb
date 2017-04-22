@@ -21,4 +21,8 @@ class Restaurant < ApplicationRecord
       self.destroy
     end
   end
+
+  def self.borough_restaurants(borough)
+    where(borough: borough)
+  end
 end

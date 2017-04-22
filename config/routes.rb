@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   resources :users, only: [:show] do
     resources :restaurants
     resources :foods
-    get '/under_ten' => 'restaurant_foods#under_ten'
+    get '/manhattan' => 'restaurants#manhattan'
+    get '/brooklyn' => 'restaurants#brooklyn'
+    get '/queens' => 'restaurants#queens'
+    get '/bronx' => 'restaurants#bronx'
+    get '/statenisland' => 'restaurants#statenisland'
   end
 
   resources :restaurant_foods, only: [:destroy]

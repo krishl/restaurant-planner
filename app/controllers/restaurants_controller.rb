@@ -54,12 +54,36 @@ class RestaurantsController < ApplicationController
     redirect_to user_restaurants_url(current_user), notice: 'Restaurant was successfully deleted.'
   end
 
+  def manhattan
+    @manhattan = set_borough('manhattan')
+  end
+
+  def brooklyn
+    @brooklyn = set_borough('brooklyn')
+  end
+
+  def queens
+    @queens = set_borough('queens')
+  end
+
+  def bronx
+    @bronx = set_borough('the bronx')
+  end
+
+  def statenisland
+    @statenisland = set_borough('staten island')
+  end
+
   private
     def set_restaurant
       @restaurant = Restaurant.find(params[:id])
     end
 
     def restaurant_params
-      params.require(:restaurant).permit(:name, :address, :phone, :cuisine, :user_id, food_ids: [], foods_attributes: [:id, :user_id, :name, restaurant_foods_attributes: [:price]])
+      params.require(:restaurant).permit(:name, :address, :phone, :cuisine, :borough, :user_id, food_ids: [], foods_attributes: [:id, :user_id, :name, restaurant_foods_attributes: [:price]])
+    end
+
+    def set_borough(borough)
+      current_user.restaurants.borough_restaurants(borough)
     end
 end

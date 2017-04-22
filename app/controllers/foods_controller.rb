@@ -21,7 +21,9 @@ class FoodsController < ApplicationController
       food_params[:restaurants_attributes].each do |restaurant|
         if food_params[:restaurants_attributes][restaurant][:name] != ""
           restaurant_name = Restaurant.find_by(name: food_params[:restaurants_attributes][restaurant][:name])
-          restaurant_food = RestaurantFood.find_by(restaurant_id: restaurant_name.id, food_id: @food.id, price: food_params[:restaurants_attributes][restaurant][:restaurant_foods_attributes]["0"][:price])
+          restaurant_food = RestaurantFood.find_by(restaurant_id: restaurant_name.id, food_id: @food.id)
+          restaurant_food.price = food_params[:restaurants_attributes][restaurant][:restaurant_foods_attributes]["0"][:price]
+          restaurant_food.save
         end
       end
       redirect_to user_food_path(current_user, @food), notice: 'Menu item was successfully created.'
@@ -58,6 +60,6 @@ class FoodsController < ApplicationController
     end
 
     def food_params
-      params.require(:food).permit(:name, :user_id, restaurant_ids: [], restaurants_attributes: [:id, :name, :address, :phone, :cuisine, :user_id, restaurant_foods_attributes: [:price]])
+      params.require(:food).permit(:name, :user_id, restaurant_ids: [], restaurants_attributes: [:id, :name, :address, :phone, :cuisine, :borough, :user_id, restaurant_foods_attributes: [:price]])
     end
 end

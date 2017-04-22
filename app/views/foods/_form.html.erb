@@ -40,6 +40,11 @@
       <%= g.label :cuisine %>
       <%= g.text_field :cuisine %>
     </div>
+
+    <div class="field">
+      <%= g.label :borough %>
+      <%= g.select :borough, ['', 'Brooklyn', 'The Bronx', 'Manhattan', 'Queens', 'Staten Island'] %>
+    </div>
     <br>
     <%= g.fields_for :restaurant_foods, @food.restaurant_foods.build do |h| %>
       <div class="field">
