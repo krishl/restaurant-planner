@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     get '/bronx' => 'static#bronx'
     get '/staten_island' => 'static#staten_island'
     get '/outside_nyc' => 'static#outside_nyc'
+    get '/under_ten' => 'static#under_ten'
   end
 
   resources :restaurant_foods, only: [:destroy]

@@ -8,6 +8,7 @@
         <% if user_signed_in? %>
         <li><%= link_to 'Restaurants', user_restaurants_path(current_user) %></li>
         <li><%= link_to 'Menu Items', user_foods_path(current_user) %></li>
+        <li><%= link_to 'Under $10', user_under_ten_path(current_user) %></li>
       </ul>
       <ul class="nav navbar-nav pull-left">
           <li class="dropdown">

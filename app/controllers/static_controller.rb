@@ -30,4 +30,8 @@ class StaticController < ApplicationController
   def outside_nyc
     @outsidenyc = set_borough('Outside NYC')
   end
+
+  def under_ten
+    @under_ten = Food.find_under_ten(params[:user_id])
+  end
 end

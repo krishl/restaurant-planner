@@ -6,8 +6,8 @@
         <br> <%= restaurant.address %> <br> <%= restaurant.cuisine %> <br>
         <% restaurant.foods.each do |food| %>
           <%= link_to food.name, user_food_path(current_user, food) %> <%= number_to_currency(RestaurantFood.find_by(restaurant_id: restaurant.id, food_id: food.id).price) %>
-        </li>
         <% end %>
+      </li>
     <% end %>
   <% else %>
     You do not have any planned restaurants in Queens to try.

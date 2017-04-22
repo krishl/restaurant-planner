@@ -31,4 +31,8 @@ class Food < ApplicationRecord
       end
     end
   end
+
+  def self.find_under_ten(user_id)
+    self.where("user_id = ?", user_id).joins(:restaurant_foods).where("price <= ?", 10)
+  end
 end
