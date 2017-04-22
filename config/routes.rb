@@ -9,7 +9,8 @@ Rails.application.routes.draw do
     get '/brooklyn' => 'restaurants#brooklyn'
     get '/queens' => 'restaurants#queens'
     get '/bronx' => 'restaurants#bronx'
-    get '/statenisland' => 'restaurants#statenisland'
+    get '/staten_island' => 'restaurants#staten_island'
+    get '/outside_nyc' => 'restaurants#outside_nyc'
   end
 
   resources :restaurant_foods, only: [:destroy]

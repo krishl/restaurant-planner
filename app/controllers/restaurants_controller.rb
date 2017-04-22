@@ -58,8 +58,12 @@ class RestaurantsController < ApplicationController
     @bronx = set_borough('the bronx')
   end
 
-  def statenisland
+  def staten_island
     @statenisland = set_borough('staten island')
+  end
+
+  def outside_nyc
+    @outsidenyc = set_borough('outside nyc')
   end
 
   private
