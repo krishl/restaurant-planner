@@ -1,7 +1,6 @@
 class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: [:show, :edit, :update, :destroy]
   before_action :require_permission
-  include RestaurantsHelper
 
   def index
     @restaurants = current_user.restaurants
@@ -40,30 +39,6 @@ class RestaurantsController < ApplicationController
   def destroy
     @restaurant.destroy
     redirect_to user_restaurants_url(current_user), notice: 'Restaurant was successfully deleted.'
-  end
-
-  def manhattan
-    @manhattan = set_borough('Manhattan')
-  end
-
-  def brooklyn
-    @brooklyn = set_borough('Brooklyn')
-  end
-
-  def queens
-    @queens = set_borough('Queens')
-  end
-
-  def bronx
-    @bronx = set_borough('The Bronx')
-  end
-
-  def staten_island
-    @statenisland = set_borough('Staten Island')
-  end
-
-  def outside_nyc
-    @outsidenyc = set_borough('Outside NYC')
   end
 
   private

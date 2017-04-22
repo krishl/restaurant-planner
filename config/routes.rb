@@ -5,12 +5,12 @@ Rails.application.routes.draw do
   resources :users, only: [:show] do
     resources :restaurants
     resources :foods
-    get '/manhattan' => 'restaurants#manhattan'
-    get '/brooklyn' => 'restaurants#brooklyn'
-    get '/queens' => 'restaurants#queens'
-    get '/bronx' => 'restaurants#bronx'
-    get '/staten_island' => 'restaurants#staten_island'
-    get '/outside_nyc' => 'restaurants#outside_nyc'
+    get '/manhattan' => 'static#manhattan'
+    get '/brooklyn' => 'static#brooklyn'
+    get '/queens' => 'static#queens'
+    get '/bronx' => 'static#bronx'
+    get '/staten_island' => 'static#staten_island'
+    get '/outside_nyc' => 'static#outside_nyc'
   end
 
   resources :restaurant_foods, only: [:destroy]
