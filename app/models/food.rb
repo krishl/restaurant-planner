@@ -9,7 +9,7 @@ class Food < ApplicationRecord
   def restaurants_attributes=(restaurants_attributes)
     restaurants_attributes.values.each do |restaurants_attribute|
       if restaurants_attribute[:name] != ""
-        restaurant = Restaurant.find_or_create_by(name: restaurants_attribute[:name], user_id: restaurants_attribute[:user_id], address: restaurants_attribute[:address], cuisine: restaurants_attribute[:cuisine], borough: restaurants_attribute[:borough])
+        restaurant = Restaurant.find_or_create_by(name: restaurants_attribute[:name], user_id: restaurants_attribute[:user_id], address: restaurants_attribute[:address], cuisine: restaurants_attribute[:cuisine], borough: restaurants_attribute[:borough], phone: restaurants_attribute[:phone])
         self.restaurants << restaurant
       end
     end
