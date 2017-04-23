@@ -32,6 +32,6 @@ class StaticController < ApplicationController
   end
 
   def under_ten
-    @under_ten = Food.find_under_ten(params[:user_id])
+    @under_ten = Food.find_under_ten(params[:user_id]).uniq
   end
 end
