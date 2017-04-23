@@ -17,7 +17,7 @@
         <tr>
           <td><%= link_to restaurant.name, user_restaurant_path(current_user, restaurant) %></td>
           <td><%= restaurant.address %></td>
-          <td><%= restaurant.phone %></td>
+          <td><%= number_to_phone(restaurant.phone) %></td>
           <td><%= restaurant.cuisine %></td>
           <td><%= link_to 'Delete', user_restaurant_path(current_user, restaurant), method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
