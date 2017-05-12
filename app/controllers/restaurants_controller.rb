@@ -4,7 +4,10 @@ class RestaurantsController < ApplicationController
 
   def index
     @restaurants = current_user.restaurants
-    render :json => @restaurants
+    respond_to do |format|
+      format.html
+      format.json { render json: @restaurants }
+    end
   end
 
   def show

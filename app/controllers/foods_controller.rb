@@ -4,6 +4,10 @@ class FoodsController < ApplicationController
 
   def index
     @foods = current_user.foods
+    respond_to do |format|
+      format.html
+      format.json { render json: @foods }
+    end
   end
 
   def show
@@ -38,7 +42,7 @@ class FoodsController < ApplicationController
 
   def destroy
     @food.destroy
-    redirect_to user_foods_path(current_user), notice: 'Menu item was successfully deleted.'
+    redirect_to user_path(current_user), notice: 'Menu item was successfully deleted.'
   end
 
   private

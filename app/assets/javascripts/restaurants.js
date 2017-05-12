@@ -1,9 +1,9 @@
 $(document).on('turbolinks:load', function() {
   $("div.sorted_restaurants").hide()
-  attachListeners()
+  attachRListeners()
 })
 
-function attachListeners() {
+function attachRListeners() {
   $("a#sort_restaurants").on("click", function(event) {
     event.preventDefault();
     $.getJSON(this.href).success(function(json) {
@@ -14,6 +14,7 @@ function attachListeners() {
 
 function restaurantDetails(json) {
   $("div.sorted_restaurants").toggle()
+  $("div.sorted_foods").hide()
   var userId = $('center').data('user-id');
   var $table = $("div.sorted_restaurants table tbody")
   $table.html("")

@@ -5,7 +5,7 @@
 <p>How would you like to view your plans?</p>
 
 <p><%= link_to "Sort By Restaurant", user_restaurants_path(current_user), class: 'btn btn-primary', id: 'sort_restaurants' %>
-  <%= link_to "Sorted By Menu Item", user_foods_path(current_user), class: 'btn btn-primary' %></p>
+  <%= link_to "Sort By Menu Item", user_foods_path(current_user), class: 'btn btn-primary', id: 'sort_foods' %></p>
 
 <div class="sorted_restaurants">
   <table class="table table-hover">
@@ -24,6 +24,22 @@
   </table>
   <br>
   <%= link_to 'Add New Restaurant', new_user_restaurant_path(current_user), class: 'btn btn-primary' %>
+</div>
+
+<div class="sorted_foods">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Food Name</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+    </tbody>
+  </table>
+  <br>
+  <%= link_to 'Add New Menu Item', new_user_food_path(current_user), class: 'btn btn-primary' %>
 </div>
 
 </center>
