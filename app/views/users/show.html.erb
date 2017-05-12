@@ -1,8 +1,7 @@
-<meta http-equiv="pragma" content="no-cache">
 <center <%= "data-user-id=#{params[:id]}" if params.has_key?(:id) %>>
   <h2>Hello, <%= current_user.email %></h2>
 
-<p>How would you like to view your plans?</p>
+<p>How would you like to view your plans?</p><br>
 
 <p><%= link_to "Sort By Restaurant", user_restaurants_path(current_user), class: 'btn btn-primary', id: 'sort_restaurants' %>
   <%= link_to "Sort By Menu Item", user_foods_path(current_user), class: 'btn btn-primary', id: 'sort_foods' %></p>

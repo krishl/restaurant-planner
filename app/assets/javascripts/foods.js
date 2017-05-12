@@ -25,4 +25,13 @@ function foodDetails(json) {
       <td><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/users/${userId}/foods/${food.id}">Remove All</a></td>
     </tr>`)
   })
+  checkFEmpty($table.html)
+}
+
+function checkFEmpty(table) {
+  if (table != "") {
+    $("table.table").hide()
+    $("p#empty").remove()
+    $("div.sorted_foods").prepend("<p id='empty'><br>You currently do not have any menu item plans.</p>")
+  }
 }

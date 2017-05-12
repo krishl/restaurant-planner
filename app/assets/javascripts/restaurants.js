@@ -28,4 +28,13 @@ function restaurantDetails(json) {
       <td><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/users/${userId}/restaurants/${restaurant.id}">Delete</a></td>
     </tr>`)
   })
+  checkREmpty($table.html)
+}
+
+function checkREmpty(table) {
+  if (table != "") {
+    $("table.table").hide()
+    $("p#empty").remove()
+    $("div.sorted_restaurants").prepend("<p id='empty'><br>You currently do not have any restaurant plans.</p>")
+  }
 }

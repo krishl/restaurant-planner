@@ -1,6 +1,6 @@
 <center>
   <h1>Restaurants</h1>
-
+<% if @restaurants.present? %>
   <table class="table table-hover">
     <thead>
       <tr>
@@ -24,7 +24,9 @@
       <% end %>
     </tbody>
   </table>
-
+  <% else %>
+    <p>You currently do not have any restaurant plans.</p>
+  <% end %>
   <br>
 
   <%= link_to 'Add New Restaurant', new_user_restaurant_path(current_user) %>
