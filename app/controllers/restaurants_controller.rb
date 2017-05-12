@@ -4,6 +4,7 @@ class RestaurantsController < ApplicationController
 
   def index
     @restaurants = current_user.restaurants
+    render :json => @restaurants
   end
 
   def show
@@ -38,7 +39,7 @@ class RestaurantsController < ApplicationController
 
   def destroy
     @restaurant.destroy
-    redirect_to user_restaurants_url(current_user), notice: 'Restaurant was successfully deleted.'
+    redirect_to user_path(current_user), notice: 'Restaurant was successfully deleted.'
   end
 
   private
