@@ -29,7 +29,7 @@ function foodDetails(json) {
 }
 
 function checkFEmpty(table) {
-  if (table != "") {
+  if (table === "") {
     $("table.table").hide()
     $("p#empty").remove()
     $("div.sorted_foods").prepend("<p id='empty'><br>You currently do not have any menu item plans.</p>")

@@ -32,7 +32,7 @@ function restaurantDetails(json) {
 }
 
 function checkREmpty(table) {
-  if (table != "") {
+  if (table === "") {
     $("table.table").hide()
     $("p#empty").remove()
     $("div.sorted_restaurants").prepend("<p id='empty'><br>You currently do not have any restaurant plans.</p>")
