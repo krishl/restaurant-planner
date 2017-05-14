@@ -38,5 +38,5 @@
     <p><i>Currently, you do not have any menu plans at <%= @restaurant.name %>.</i></p>
 <% end %>
 
-<%= link_to 'Edit', edit_user_restaurant_path(current_user, @restaurant) %> |
-<%= link_to 'Back', user_restaurants_path %>
+<p><%= button_to 'Edit', edit_user_restaurant_path(current_user, @restaurant) %></p>
+<p><%= link_to 'Back', user_restaurants_path %> | Next </p>
