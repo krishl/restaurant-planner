@@ -1,25 +1,25 @@
-<p>
-  <h1><%= @restaurant.name %></h1>
+<p <%= "data-user-id=#{params[:user_id]}" if params.has_key?(:user_id) %>>
+  <h1 class="rName"><%= @restaurant.name %></h1>
 </p>
 
 <p>
   <strong>Address:</strong>
-  <%= @restaurant.address %>
+  <span class="rAddress"><%= @restaurant.address %></div>
 </p>
 
 <p>
   <strong>Phone:</strong>
-  <%= number_to_phone(@restaurant.phone) %>
+  <span class="rPhone"><%= number_to_phone(@restaurant.phone) %></div>
 </p>
 
 <p>
   <strong>Cuisine:</strong>
-  <%= @restaurant.cuisine %>
+  <span class="rCuisine"><%= @restaurant.cuisine %></div>
 </p>
 
 <p>
   <strong>Borough:</strong>
-  <%= @restaurant.borough %>
+  <span class="rBorough"><%= @restaurant.borough %></div>
 </p>
 
 <%= link_to "View on Google Maps", "https://www.google.com/maps/search/#{@restaurant.address}" %>
@@ -27,10 +27,10 @@
 <h3>Menu Items To Try</h3>
 
 <% if @restaurant.foods.exists? %>
-  <ul>
-    <% @restaurant.foods.all.each do |food| %>
+  <ul class="rFoods">
+    <% @restaurant.foods.each do |food| %>
       <li><%= link_to food.name, user_food_path(current_user, food) %>
-        <%= number_to_currency(RestaurantFood.find_by(restaurant_id: @restaurant.id, food_id: food.id).price) %> | <%= link_to 'Delete', restaurant_food_path(RestaurantFood.find_by(restaurant_id: @restaurant.id, food_id: food.id).id), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <span id="rPrice"><%= number_to_currency(RestaurantFood.find_by(restaurant_id: @restaurant.id, food_id: food.id).price) %></span> | <%= link_to 'Delete', restaurant_food_path(RestaurantFood.find_by(restaurant_id: @restaurant.id, food_id: food.id).id), method: :delete, data: { confirm: 'Are you sure?' } %>
       </li>
     <% end %>
   </ul>
@@ -38,5 +38,5 @@
     <p><i>Currently, you do not have any menu plans at <%= @restaurant.name %>.</i></p>
 <% end %>
 
-<p><%= button_to 'Edit', edit_user_restaurant_path(current_user, @restaurant) %></p>
-<p><%= link_to 'Back', user_restaurants_path %> | Next </p>
+<p><%= link_to 'Edit', edit_user_restaurant_path(current_user, @restaurant), class: 'btn btn-default' %></p>
+<p><%= link_to 'Back', user_restaurants_path %> | <a href="#" class="js-next" data-rid="<%=@restaurant.id%>">Next</a></p>

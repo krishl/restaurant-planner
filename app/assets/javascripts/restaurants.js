@@ -1,20 +1,21 @@
 $(document).on('turbolinks:load', function() {
   $("div.sorted_restaurants").hide()
   attachRListeners()
+  nextRestaurant()
 })
 
 function attachRListeners() {
   $("a#sort_restaurants").on("click", function(event) {
     event.preventDefault();
     $.getJSON(this.href).success(function(json) {
+      $("div.sorted_restaurants").toggle()
+      $("div.sorted_foods").hide()
       restaurantDetails(json)
     })
   })
 }
 
 function restaurantDetails(json) {
-  $("div.sorted_restaurants").toggle()
-  $("div.sorted_foods").hide()
   var userId = $('center').data('user-id');
   var $table = $("div.sorted_restaurants table tbody")
   $table.html("")
@@ -37,4 +38,26 @@ function checkREmpty(table) {
     $("p#empty").remove()
     $("div.sorted_restaurants").prepend("<p id='empty'><br>You currently do not have any restaurant plans.</p>")
   }
+}
+
+function nextRestaurant() {
+  $(".js-next").on("click", function(event) {
+    event.preventDefault();
+    var userId = $('p').data('user-id');
+    var nextId = parseInt($(".js-next").data("rid")) + 1;
+    $.getJSON(`/users/${userId}/restaurants/${nextId}`, function(restaurant) {
+      $("h1.rName").text(restaurant.name)
+      $("span.rAddress").text(restaurant.address)
+      $("span.rCuisine").text(restaurant.cuisine)
+      $("span.rPhone").text(restaurant.phone)
+      $("span.rBorough").text(restaurant.borough)
+      $("ul.rFoods").html("")
+
+      restaurant.foods.forEach(function(food) {
+        var rListItem = `<li><a href="/users/${userId}/foods/${food.id}">${food.name}</a> <span id="rPrice"></span> |
+        <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/restaurant_foods/3">Delete</a>`
+        $("ul.rFoods").append(rListItem)
+      })
+    })
+  })
 }
