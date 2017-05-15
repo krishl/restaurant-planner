@@ -53,10 +53,14 @@ function nextRestaurant() {
       $("span.rBorough").text(restaurant.borough)
       $("ul.rFoods").html("")
 
-      restaurant.foods.forEach(function(food) {
-        var rListItem = `<li><a href="/users/${userId}/foods/${food.id}">${food.name}</a> <span id="rPrice"></span> |
-        <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/restaurant_foods/3">Delete</a>`
+      restaurant.foods.forEach(function(food, i) {
+        var rListItem = `<li><a href="/users/${userId}/foods/${food.id}">${food.name}</a> <span id="rPrice${i}"></span> | <span id="rDelete${i}"></span>`
         $("ul.rFoods").append(rListItem)
+      })
+
+      restaurant.restaurant_foods.forEach(function(restaurant_food, i) {
+        $(`span#rPrice${i}`).text(`${accounting.formatMoney(restaurant_food.price)}`)
+        $(`span#rDelete${i}`).html(`<a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/restaurant_foods/${restaurant_food.id}">Delete</a>`)
       })
     })
   })
