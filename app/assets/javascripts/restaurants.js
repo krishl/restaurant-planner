@@ -1,8 +1,13 @@
 $(document).on('turbolinks:load', function() {
-  $("div.sorted_restaurants").hide()
-  attachRListeners()
-  var restIndex = $(".js-next").data("ridx")
-  nextRestaurant(restIndex)
+  if ($('body').is('.userShow')) {
+    $("div.sorted_restaurants").hide()
+    attachRListeners()
+  }
+
+  if ($('body').is('.restShow')) {
+    var restIndex = $(".js-next").data("ridx")
+    nextRestaurant(restIndex)
+  }
 })
 
 function attachRListeners() {

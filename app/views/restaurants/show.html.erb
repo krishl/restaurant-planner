@@ -1,3 +1,4 @@
+<body class="restShow">
 <p>
   <h1 class="rName"><%= @restaurant.name %></h1>
 </p>
@@ -40,3 +41,4 @@
 
 <p><%= link_to 'Edit', edit_user_restaurant_path(current_user, @restaurant), class: 'btn btn-default' %></p>
 <p><%= link_to 'Your Index', user_path(current_user) %> | <a href="#" class="js-next" data-uid="<%=current_user.id %>" data-ridx="<%= users_restaurants.index(@restaurant.id) %>" data-urests="<%= users_restaurants %>">Next</a></p>
+</body>
