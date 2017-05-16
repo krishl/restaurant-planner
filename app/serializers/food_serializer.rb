@@ -1,6 +1,5 @@
 class FoodSerializer < ActiveModel::Serializer
-  attributes :id, :name, :user_id
+  attributes :id, :name
   has_many :restaurants
   has_many :restaurant_foods
-  belongs_to :user
 end

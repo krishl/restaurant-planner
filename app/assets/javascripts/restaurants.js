@@ -62,6 +62,8 @@ function nextRestaurant() {
         $(`span#rPrice${i}`).text(`${accounting.formatMoney(restaurant_food.price)}`)
         $(`span#rDelete${i}`).html(`<a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/restaurant_foods/${restaurant_food.id}">Delete</a>`)
       })
+    }).fail(function() {
+      alert("You have reached the end.")
     })
   })
 }
