@@ -1,4 +1,4 @@
-<p <%= "data-user-id=#{params[:user_id]}" if params.has_key?(:user_id) %>>
+<p>
   <h1 class="rName"><%= @restaurant.name %></h1>
 </p>
 
@@ -39,4 +39,4 @@
 <% end %>
 
 <p><%= link_to 'Edit', edit_user_restaurant_path(current_user, @restaurant), class: 'btn btn-default' %></p>
-<p><%= link_to 'Back', user_restaurants_path %> | <a href="#" class="js-next" data-rid="<%=@restaurant.id%>">Next</a></p>
+<p><%= link_to 'Your Index', user_path(current_user) %> | <a href="#" class="js-next" data-uid="<%=current_user.id %>" data-rid="<%=@restaurant.id%>">Next</a></p>

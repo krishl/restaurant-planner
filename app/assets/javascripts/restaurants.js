@@ -43,7 +43,7 @@ function checkREmpty(table) {
 function nextRestaurant() {
   $(".js-next").on("click", function(event) {
     event.preventDefault();
-    var userId = $('p').data('user-id');
+    var userId = $('.js-next').data('uid');
     var nextId = parseInt($(".js-next").data("rid")) + 1;
     $.getJSON(`/users/${userId}/restaurants/${nextId}`, function(restaurant) {
       $("h1.rName").text(restaurant.name)
