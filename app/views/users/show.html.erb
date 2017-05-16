@@ -1,3 +1,4 @@
+<body class="userShow">
 <center <%= "data-user-id=#{params[:id]}" if params.has_key?(:id) %>>
   <h2>Hello, <%= current_user.email %></h2>
 
@@ -42,3 +43,4 @@
 </div>
 
 </center>
+</body>

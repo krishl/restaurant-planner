@@ -1,8 +1,13 @@
 $(document).on('turbolinks:load', function() {
-  $("div.sorted_foods").hide()
-  attachFListeners()
-  var foodIndex = $(".js-nextf").data("fidx")
-  nextFood(foodIndex)
+  if ($('body').is('.userShow')) {
+    $("div.sorted_foods").hide()
+    attachFListeners()
+  }
+
+  if ($('body').is('.foodShow')) {
+    var foodIndex = $(".js-nextf").data("fidx")
+    nextFood(foodIndex)
+  }
 })
 
 function attachFListeners() {

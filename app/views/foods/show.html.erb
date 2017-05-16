@@ -1,3 +1,4 @@
+<body class="foodShow">
 <h1 class="fName"><%= @food.name %></h1>
 
 <h3>This is planned to be ordered at:</h3>
@@ -15,3 +16,4 @@
 
 <p><%= link_to 'Edit', edit_user_food_path(current_user, @food), class: 'btn btn-default' %></p>
 <p><%= link_to 'Your Index', user_path(current_user) %> | <a href="#" class="js-nextf" data-uid="<%=current_user.id %>" data-fidx="<%= users_foods.index(@food.id) %>" data-ufoods="<%= users_foods %>">Next</a></p>
+</body>
