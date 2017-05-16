@@ -1,7 +1,7 @@
 $(document).on('turbolinks:load', function() {
   $("div.sorted_foods").hide()
   attachFListeners()
-  var foodIndex = parseInt($(".js-nextf").data("fidx"))
+  var foodIndex = $(".js-nextf").data("fidx")
   nextFood(foodIndex)
 })
 

@@ -1,6 +1,7 @@
 class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: [:show, :edit, :update, :destroy]
   before_action :require_permission
+  include RestaurantsHelper
 
   def index
     @restaurants = current_user.restaurants

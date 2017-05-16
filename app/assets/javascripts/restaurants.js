@@ -1,7 +1,8 @@
 $(document).on('turbolinks:load', function() {
   $("div.sorted_restaurants").hide()
   attachRListeners()
-  nextRestaurant()
+  var restIndex = $(".js-next").data("ridx")
+  nextRestaurant(restIndex)
 })
 
 function attachRListeners() {
@@ -40,11 +41,13 @@ function checkREmpty(table) {
   }
 }
 
-function nextRestaurant() {
+function nextRestaurant(restIndex) {
   $(".js-next").on("click", function(event) {
     event.preventDefault();
     var userId = $('.js-next').data('uid');
-    var nextId = parseInt($(".js-next").data("rid")) + 1;
+    var restArray = $(".js-next").data("urests");
+    restIndex += 1
+    var nextId = restArray[restIndex];
     $.getJSON(`/users/${userId}/restaurants/${nextId}`, function(restaurant) {
       $("h1.rName").text(restaurant.name)
       $("span.rAddress").text(restaurant.address)
