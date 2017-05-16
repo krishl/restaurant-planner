@@ -1,15 +1,17 @@
-<h1><%= @food.name %></h1>
+<h1 class="fName"><%= @food.name %></h1>
 
 <h3>This is planned to be ordered at:</h3>
 <% if @food.restaurants.exists? %>
-  <ul>
-    <% @food.restaurants.all.each do |restaurant| %>
-      <li><%= link_to restaurant.name, user_restaurant_path(current_user, restaurant.id) %> <%= number_to_currency(RestaurantFood.find_by(restaurant_id: restaurant.id, food_id: @food.id).price) %> | <%= link_to 'Delete', restaurant_food_path(RestaurantFood.find_by(restaurant_id: restaurant.id, food_id: @food.id).id), method: :delete, data: { confirm: 'Are you sure?' } %></li>
+  <ul class="fRestaurants">
+    <% @food.restaurants.each do |restaurant| %>
+      <li><%= link_to restaurant.name, user_restaurant_path(current_user, restaurant.id) %>
+        <%= number_to_currency(RestaurantFood.find_by(restaurant_id: restaurant.id, food_id: @food.id).price) %> | <%= link_to 'Delete', restaurant_food_path(RestaurantFood.find_by(restaurant_id: restaurant.id, food_id: @food.id).id), method: :delete, data: { confirm: 'Are you sure?' } %>
+      </li>
     <% end %>
   </ul>
 <% else %>
   <p><i>Currently, you are not planning to eat <%= @food.name %> at any restaurant.</i></p>
 <% end %>
 
-<%= link_to 'Edit', edit_user_food_path(current_user, @food) %> |
-<%= link_to 'Back', user_foods_path %>
+<p><%= link_to 'Edit', edit_user_food_path(current_user, @food), class: 'btn btn-default' %></p>
+<p><%= link_to 'Your Index', user_path(current_user) %> | <a href="#" class="js-nextf" data-uid="<%=current_user.id %>" data-fidx="<%= users_foods.index(@food.id) %>" data-ufoods="<%= users_foods %>">Next</a></p>

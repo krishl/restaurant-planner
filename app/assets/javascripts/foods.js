@@ -1,6 +1,8 @@
 $(document).on('turbolinks:load', function() {
   $("div.sorted_foods").hide()
   attachFListeners()
+  var foodIndex = parseInt($(".js-nextf").data("fidx"))
+  nextFood(foodIndex)
 })
 
 function attachFListeners() {
@@ -34,4 +36,31 @@ function checkFEmpty(table) {
     $("p#empty").remove()
     $("div.sorted_foods").prepend("<p id='empty'><br>You currently do not have any menu item plans.</p>")
   }
+}
+
+function nextFood(foodIndex) {
+  $(".js-nextf").on("click", function(event) {
+    event.preventDefault();
+    var userId = $('.js-nextf').data('uid');
+    var foodArray = $(".js-nextf").data("ufoods");
+    foodIndex += 1;
+    var nextId = foodArray[foodIndex];
+
+    $.getJSON(`/users/${userId}/foods/${nextId}`, function(food) {
+      $("h1.fName").text(food.name)
+      $("ul.fRestaurants").html("")
+
+      food.restaurants.forEach(function(food, i) {
+        var rListItem = `<li><a href="/users/${userId}/foods/${food.id}">${food.name}</a> <span id="fPrice${i}"></span> | <span id="fDelete${i}"></span>`
+        $("ul.fRestaurants").append(rListItem)
+      })
+
+      food.restaurant_foods.forEach(function(restaurant_food, i) {
+        $(`span#fPrice${i}`).text(`${accounting.formatMoney(restaurant_food.price)}`)
+        $(`span#fDelete${i}`).html(`<a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/restaurant_foods/${restaurant_food.id}">Delete</a>`)
+      })
+    }).fail(function() {
+      alert("You have reached the end.")
+    })
+  })
 }

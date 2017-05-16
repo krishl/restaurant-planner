@@ -1,6 +1,7 @@
 class FoodsController < ApplicationController
   before_action :set_food, only: [:show, :edit, :update, :destroy]
   before_action :require_permission
+  include FoodsHelper
 
   def index
     @foods = current_user.foods
@@ -11,6 +12,10 @@ class FoodsController < ApplicationController
   end
 
   def show
+    respond_to do |format|
+      format.html
+      format.json { render json: @food }
+    end
   end
 
   def new
