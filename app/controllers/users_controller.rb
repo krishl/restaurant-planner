@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :require_user
 
   def show
+    @restaurant = Restaurant.new
   end
 
   private

@@ -23,7 +23,11 @@
     </tbody>
   </table>
   <br>
-  <%= link_to 'Add New Restaurant', new_user_restaurant_path(current_user), class: 'btn btn-primary' %>
+  <%= link_to 'Add New Restaurant', new_user_restaurant_path(current_user), class: 'btn btn-info', id: 'add_new_rest' %>
+
+  <div class="new_restaurant">
+    <p><br><%= render 'restaurants/form', restaurant: @restaurant %></p>
+  </div>
 </div>
 
 <div class="sorted_foods">

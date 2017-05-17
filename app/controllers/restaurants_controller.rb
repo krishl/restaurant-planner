@@ -29,7 +29,7 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.new(restaurant_params)
     if @restaurant.save
       Restaurant.save_restaurant(@restaurant, restaurant_params)
-      redirect_to user_restaurant_path(current_user, @restaurant), notice: 'Restaurant was successfully created.'
+      render json: @restaurant, status: 201
     else
       render :new
     end

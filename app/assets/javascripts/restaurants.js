@@ -1,7 +1,8 @@
 $(document).on('turbolinks:load', function() {
   if ($('body').is('.userShow')) {
     $("div.sorted_restaurants").hide()
-    attachRListeners()
+    $("div.new_restaurant").hide()
+    restaurantIndexListeners()
   }
 
   if ($('body').is('.restShow')) {
@@ -10,7 +11,7 @@ $(document).on('turbolinks:load', function() {
   }
 })
 
-function attachRListeners() {
+function restaurantIndexListeners() {
   $("a#sort_restaurants").on("click", function(event) {
     event.preventDefault();
     $.getJSON(this.href).success(function(json) {
@@ -18,6 +19,23 @@ function attachRListeners() {
       $("div.sorted_foods").hide()
       restaurantDetails(json)
     })
+  })
+
+  $("a#add_new_rest").on("click", function(event) {
+    event.preventDefault();
+    $("div.new_restaurant").toggle()
+  })
+
+  $("form").submit(function(event) {
+    event.preventDefault();
+    var userId = $('center').data('user-id');
+    var values = $(this).serialize()
+    var postingRestaurant = $.post(`/users/${userId}/restaurants`, values)
+    postingRestaurant.done(function(data, userId) {
+      newRestaurant(data)
+    })
+    $("form").trigger("reset")
+    $("div.new_restaurant").hide()
   })
 }
 
@@ -27,13 +45,7 @@ function restaurantDetails(json) {
   $table.html("")
 
   json.forEach(function(restaurant) {
-    $table.append(`<tr>
-      <td><a href="/users/${userId}/restaurants/${restaurant.id}">${restaurant.name}</td>
-      <td>${restaurant.address}</td>
-      <td>${restaurant.phone}</td>
-      <td>${restaurant.cuisine}</td>
-      <td><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/users/${userId}/restaurants/${restaurant.id}">Delete</a></td>
-    </tr>`)
+    newRestaurant(restaurant, userId)
   })
   checkREmpty($table.html)
 }
@@ -74,4 +86,32 @@ function nextRestaurant(restIndex) {
       alert("You have reached the end.")
     })
   })
+}
+
+function newRestaurant(data) {
+  var restaurant = new Restaurant(data)
+  restaurant.newRow()
+}
+
+class Restaurant {
+  constructor(data) {
+    this.id = data.id
+    this.name = data.name
+    this.address = data.address
+    this.phone = data.phone
+    this.cuisine = data.cuisine
+  }
+}
+
+Restaurant.prototype.newRow = function() {
+  var $table = $("div.sorted_restaurants table tbody")
+  var userId = $('center').data('user-id');
+  var newRow = `<tr>
+    <td><a href="/users/${userId}/restaurants/${this.id}">${this.name}</td>
+    <td>${this.address}</td>
+    <td>${this.phone}</td>
+    <td>${this.cuisine}</td>
+    <td><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/users/${userId}/restaurants/${this.id}">Delete</a></td>
+    </tr>`
+  $table.append(newRow)
 }
