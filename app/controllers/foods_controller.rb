@@ -29,7 +29,7 @@ class FoodsController < ApplicationController
     @food = Food.new(food_params)
     if @food.save
       Food.save_food(@food, food_params)
-      redirect_to user_food_path(current_user, @food), notice: 'Menu item was successfully created.'
+      render json: @food, status: 201
     else
       render :new
     end

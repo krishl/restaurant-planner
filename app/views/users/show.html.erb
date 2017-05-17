@@ -43,7 +43,11 @@
     </tbody>
   </table>
   <br>
-  <%= link_to 'Add New Menu Item', new_user_food_path(current_user), class: 'btn btn-primary' %>
+  <%= link_to 'Add New Menu Item', new_user_food_path(current_user), class: 'btn btn-info', id: 'add_new_food' %>
+
+  <div class="new_food">
+    <p><br><%= render 'foods/form', food: @food %></p>
+  </div>
 </div>
 
 </center>

@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   def show
     @restaurant = Restaurant.new
+    @food = Food.new
   end
 
   private

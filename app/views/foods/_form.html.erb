@@ -1,4 +1,4 @@
-<%= form_for([current_user, @food]) do |f| %>
+<%= form_for([current_user, @food], html: {id: :foodForm }) do |f| %>
 <%= f.hidden_field :user_id, :value => current_user.id %>
   <% if food.errors.any? %>
     <div id="error_explanation">
@@ -55,7 +55,7 @@
   <br>
   <% end %>
 
-  <div class="actions">
+  <div>
     <%= f.submit %>
   </div>
 <% end %>

@@ -26,26 +26,25 @@ function restaurantIndexListeners() {
     $("div.new_restaurant").toggle()
   })
 
-  $("form").submit(function(event) {
+  $("form#restaurantForm").submit(function(event) {
     event.preventDefault();
     var userId = $('center').data('user-id');
     var values = $(this).serialize()
     var postingRestaurant = $.post(`/users/${userId}/restaurants`, values)
-    postingRestaurant.done(function(data, userId) {
+    postingRestaurant.done(function(data) {
       newRestaurant(data)
     })
     $("form").trigger("reset")
-    $("div.new_restaurant").hide()
+    $("form#restaurantForm").hide()
   })
 }
 
 function restaurantDetails(json) {
-  var userId = $('center').data('user-id');
   var $table = $("div.sorted_restaurants table tbody")
   $table.html("")
 
   json.forEach(function(restaurant) {
-    newRestaurant(restaurant, userId)
+    newRestaurant(restaurant)
   })
   checkREmpty($table.html)
 }

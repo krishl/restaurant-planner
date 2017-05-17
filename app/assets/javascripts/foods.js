@@ -1,7 +1,8 @@
 $(document).on('turbolinks:load', function() {
   if ($('body').is('.userShow')) {
     $("div.sorted_foods").hide()
-    attachFListeners()
+    $("div.new_food").hide()
+    foodIndexListeners()
   }
 
   if ($('body').is('.foodShow')) {
@@ -10,7 +11,7 @@ $(document).on('turbolinks:load', function() {
   }
 })
 
-function attachFListeners() {
+function foodIndexListeners() {
   $("a#sort_foods").on("click", function(event) {
     event.preventDefault();
     $.getJSON(this.href).success(function(json) {
@@ -18,6 +19,23 @@ function attachFListeners() {
       $("div.sorted_restaurants").hide()
       foodDetails(json)
     })
+  })
+
+  $("a#add_new_food").on("click", function(event) {
+    event.preventDefault();
+    $("div.new_food").toggle()
+  })
+
+  $("form#foodForm").submit(function(event) {
+    event.preventDefault();
+    var userId = $('center').data('user-id');
+    var values = $(this).serialize()
+    var postingFood = $.post(`/users/${userId}/foods`, values)
+    postingFood.done(function(data) {
+      newFood(data)
+    })
+    $("div.foodActions").trigger("reset")
+    $("form#foodForm").hide()
   })
 }
 
@@ -27,10 +45,7 @@ function foodDetails(json) {
   $table.html("")
 
   json.forEach(function(food) {
-    $table.append(`<tr>
-      <td><a href="/users/${userId}/foods/${food.id}">${food.name}</td>
-      <td><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/users/${userId}/foods/${food.id}">Remove All</a></td>
-    </tr>`)
+    newFood(food)
   })
   checkFEmpty($table.html)
 }
@@ -55,8 +70,8 @@ function nextFood(foodIndex) {
       $("h1.fName").text(food.name)
       $("ul.fRestaurants").html("")
 
-      food.restaurants.forEach(function(food, i) {
-        var rListItem = `<li><a href="/users/${userId}/foods/${food.id}">${food.name}</a> <span id="fPrice${i}"></span> | <span id="fDelete${i}"></span>`
+      food.restaurants.forEach(function(restaurant, i) {
+        var rListItem = `<li><a href="/users/${userId}/restaurants/${restaurant.id}">${restaurant.name}</a> <span id="fPrice${i}"></span> | <span id="fDelete${i}"></span>`
         $("ul.fRestaurants").append(rListItem)
       })
 
@@ -68,4 +83,26 @@ function nextFood(foodIndex) {
       alert("You have reached the end.")
     })
   })
+}
+
+function newFood(data) {
+  var food = new Food(data)
+  food.newRow()
+}
+
+class Food {
+  constructor(data) {
+    this.id = data.id
+    this.name = data.name
+  }
+}
+
+Food.prototype.newRow = function() {
+  var $table = $("div.sorted_foods table tbody")
+  var userId = $('center').data('user-id');
+  var newRow = `<tr>
+    <td><a href="/users/${userId}/foods/${this.id}">${this.name}</td>
+    <td><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/users/${userId}/foods/${this.id}">Remove All</a></td>
+  </tr>`
+  $table.append(newRow)
 }
