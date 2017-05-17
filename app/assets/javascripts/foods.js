@@ -33,9 +33,10 @@ function foodIndexListeners() {
     var postingFood = $.post(`/users/${userId}/foods`, values)
     postingFood.done(function(data) {
       newFood(data)
+      $("#foodSubmit").attr('disabled', false);
     })
-    $("div.foodActions").trigger("reset")
-    $("form#foodForm").hide()
+    $("form").trigger("reset")
+    $("div.new_food").hide()
   })
 }
 

@@ -33,9 +33,10 @@ function restaurantIndexListeners() {
     var postingRestaurant = $.post(`/users/${userId}/restaurants`, values)
     postingRestaurant.done(function(data) {
       newRestaurant(data)
+      $("#restaurantSubmit").attr('disabled', false);
     })
     $("form").trigger("reset")
-    $("form#restaurantForm").hide()
+    $("div.new_restaurant").hide()
   })
 }
 
