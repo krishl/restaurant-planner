@@ -46,11 +46,11 @@ function restaurantDetails(json) {
   json.forEach(function(restaurant) {
     newRestaurant(restaurant)
   })
-  checkREmpty($table.html)
+  checkREmpty()
 }
 
-function checkREmpty(table) {
-  if (table === "") {
+function checkREmpty() {
+  if ($('tbody').is(':empty')) {
     $("table.table").hide()
     $("p#empty").remove()
     $("div.sorted_restaurants").prepend("<p id='empty'><br>You currently do not have any restaurant plans.</p>")
@@ -113,4 +113,6 @@ Restaurant.prototype.newRow = function() {
     <td><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/users/${userId}/restaurants/${this.id}">Delete</a></td>
     </tr>`
   $table.append(newRow)
+  $("p#empty").remove()
+  $("table.table").show()
 }

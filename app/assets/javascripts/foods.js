@@ -47,11 +47,11 @@ function foodDetails(json) {
   json.forEach(function(food) {
     newFood(food)
   })
-  checkFEmpty($table.html)
+  checkFEmpty()
 }
 
-function checkFEmpty(table) {
-  if (table === "") {
+function checkFEmpty() {
+  if ($('tbody').is(':empty')) {
     $("table.table").hide()
     $("p#empty").remove()
     $("div.sorted_foods").prepend("<p id='empty'><br>You currently do not have any menu item plans.</p>")
@@ -105,4 +105,6 @@ Food.prototype.newRow = function() {
     <td><a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/users/${userId}/foods/${this.id}">Remove All</a></td>
   </tr>`
   $table.append(newRow)
+  $("p#empty").remove()
+  $("table.table").show()
 }
