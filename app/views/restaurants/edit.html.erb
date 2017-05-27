@@ -1,6 +1,8 @@
-<h1>Editing Restaurant</h1>
+<body class="restEdit">
+  <h1>Editing Restaurant</h1>
 
-<%= render 'form', restaurant: @restaurant %>
+  <%= render 'form', restaurant: @restaurant %>
 
-<%= link_to 'Show', user_restaurant_path(@restaurant) %> |
-<%= link_to 'Back', user_restaurants_path %>
+  <%= link_to 'Show', user_restaurant_path(@restaurant) %> |
+  <%= link_to 'Back', user_restaurants_path %>
+</body>

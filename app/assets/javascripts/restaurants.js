@@ -9,6 +9,10 @@ $(document).on('turbolinks:load', function() {
     var restIndex = $(".js-next").data("ridx")
     nextRestaurant(restIndex)
   }
+
+  if ($('body').is('.restEdit')) {
+    menuForm()
+  }
 })
 
 function restaurantIndexListeners() {
@@ -38,6 +42,7 @@ function restaurantIndexListeners() {
     $("form").trigger("reset")
     $("div.new_restaurant").hide()
   })
+  menuForm()
 }
 
 function restaurantDetails(json) {
@@ -116,4 +121,30 @@ Restaurant.prototype.newRow = function() {
   $table.append(newRow)
   $("p#empty").remove()
   $("table.table").show()
+}
+
+function menuForm() {
+  $("div.menu_item_fields").on("click", "a.add_menu_item_field", function(event) {
+    event.preventDefault();
+    if (typeof counter == 'undefined') {
+      counter = 1
+    } else {
+      counter
+    }
+    $("div.menu_item_fields").append(`
+      <input value="1" type="hidden" name="restaurant[foods_attributes][${counter}][user_id]" id="restaurant_foods_attributes_${counter}_user_id">
+      <div class="field">
+        <label for="restaurant_foods_attributes_${counter}_name">Name</label>
+        <input type="text" name="restaurant[foods_attributes][${counter}][name]" id="restaurant_foods_attributes_${counter}_name">
+        <a href="#" class="add_menu_item_field">+</a> <a href="#" class="remove_menu_item_field">-</a>
+      </div>
+
+      <div class="field">
+        <label for="restaurant_foods_attributes_${counter}_restaurant_foods_attributes_0_price">Price</label>
+        <input step="0.01" min="0" type="number" name="restaurant[foods_attributes][${counter}][restaurant_foods_attributes][0][price]" id="restaurant_foods_attributes_${counter}_restaurant_foods_attributes_0_price">
+      </div>
+    <br>
+    `)
+    counter++
+  })
 }
