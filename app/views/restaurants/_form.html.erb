@@ -44,7 +44,7 @@
       <%= g.hidden_field :user_id, :value => current_user.id %>
       <div class="field">
         <%= g.label :name %>
-        <%= g.text_field :name %> <a href="#" class="add_menu_item_field">+</a> <a href="#" class="remove_menu_item_field">-</a>
+        <%= g.text_field :name %> <a href="#" class="add_menu_item_field">+</a>
       </div>
       <%= g.fields_for :restaurant_foods, @restaurant.restaurant_foods.build do |h| %>
       <div class="field">
