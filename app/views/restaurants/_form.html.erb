@@ -44,7 +44,7 @@
       <%= g.hidden_field :user_id, :value => current_user.id %>
       <div class="field">
         <%= g.label :name %>
-        <%= g.text_field :name %> <a href="#" class="add_menu_item_field">+</a>
+        <%= g.text_field :name %>
       </div>
       <%= g.fields_for :restaurant_foods, @restaurant.restaurant_foods.build do |h| %>
       <div class="field">
@@ -52,8 +52,11 @@
         <%= h.number_field :price, :step => 0.01, :min => 0 %>
       </div>
       <% end %>
-    <br>
     <% end %>
+  </div>
+
+  <div class="buttons">
+    <p><button class='btn btn-info' id="remove_menu_item_field">-</button> <button class='btn btn-info' id="add_menu_item_field">+</button></p>
   </div>
 
   <div>

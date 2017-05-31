@@ -2,6 +2,7 @@ $(document).on('turbolinks:load', function() {
   if ($('body').is('.userShow')) {
     $("div.sorted_restaurants").hide()
     $("div.new_restaurant").hide()
+    $("button#remove_menu_item_field").hide()
     restaurantIndexListeners()
   }
 
@@ -11,6 +12,7 @@ $(document).on('turbolinks:load', function() {
   }
 
   if ($('body').is('.restEdit')) {
+    $("button#remove_menu_item_field").hide()
     menuForm()
   }
 })
@@ -125,29 +127,29 @@ Restaurant.prototype.newRow = function() {
 
 function menuForm() {
   var counter = 0
-  $("div.menu_item_fields").on("click", "a.add_menu_item_field", function(event) {
+  $("div.buttons").on("click", "button#add_menu_item_field", function(event) {
     event.preventDefault();
+    $("button#remove_menu_item_field").show()
     counter++
     $("div.menu_item_fields").append(`
       <div class="added_menu_fields">
+        <br>${counter}
         <input value="1" type="hidden" name="restaurant[foods_attributes][${counter}][user_id]" id="restaurant_foods_attributes_${counter}_user_id">
         <div class="field">
           <label for="restaurant_foods_attributes_${counter}_name">Name</label>
           <input type="text" name="restaurant[foods_attributes][${counter}][name]" id="restaurant_foods_attributes_${counter}_name">
-          <a href="#" class="add_menu_item_field">+</a> <a href="#" class="remove_menu_item_field">-</a>
         </div>
 
         <div class="field">
           <label for="restaurant_foods_attributes_${counter}_restaurant_foods_attributes_0_price">Price</label>
           <input step="0.01" min="0" type="number" name="restaurant[foods_attributes][${counter}][restaurant_foods_attributes][0][price]" id="restaurant_foods_attributes_${counter}_restaurant_foods_attributes_0_price">
         </div>
-      <br>
     </div>
     `)
   })
 
-  $("div.menu_item_fields").on("click", "a.remove_menu_item_field", function(event) {
+  $("div.buttons").on("click", "button#remove_menu_item_field", function(event) {
     event.preventDefault();
-    $(this).parents('div').eq(1).remove()
+    $('div.menu_item_fields').children().last().remove()
   })
 }
