@@ -133,7 +133,7 @@ function menuForm() {
     counter++
     $("div.menu_item_fields").append(`
       <div class="added_menu_fields">
-        <br>${counter}
+        <br>
         <input value="1" type="hidden" name="restaurant[foods_attributes][${counter}][user_id]" id="restaurant_foods_attributes_${counter}_user_id">
         <div class="field">
           <label for="restaurant_foods_attributes_${counter}_name">Name</label>
