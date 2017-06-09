@@ -126,7 +126,7 @@ Restaurant.prototype.newRow = function() {
 }
 
 function menuForm() {
-  var counter = 0
+  var counter = -1
   $("div.buttons").on("click", "button#add_menu_item_field", function(event) {
     event.preventDefault();
     $("button#remove_menu_item_field").show()
@@ -151,5 +151,8 @@ function menuForm() {
   $("div.buttons").on("click", "button#remove_menu_item_field", function(event) {
     event.preventDefault();
     $('div.menu_item_fields').children().last().remove()
+    if ($('div.menu_item_fields').children().last()[0].name === "restaurant[foods_attributes][0][user_id]") {
+      $("button#remove_menu_item_field").hide()
+    }
   })
 }
