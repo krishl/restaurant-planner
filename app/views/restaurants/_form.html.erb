@@ -39,22 +39,16 @@
   <hr>
   <h3>Add Menu Items to Try</h3>
 
-  <% 3.times do %>
+  <div class="menu_item_fields">
     <%= f.fields_for :foods, @restaurant.foods.build do |g| %>
       <%= g.hidden_field :user_id, :value => current_user.id %>
-      <div class="field">
-        <%= g.label :name %>
-        <%= g.text_field :name %>
-      </div>
-      <%= g.fields_for :restaurant_foods, @restaurant.restaurant_foods.build do |h| %>
-      <div class="field">
-        <%= h.label :price %>
-        <%= h.number_field :price, :step => 0.01, :min => 0 %>
-      </div>
-      <% end %>
-    <br>
+      
     <% end %>
-  <% end %>
+  </div>
+
+  <div class="buttons">
+    <p><button class='btn btn-info' id="remove_menu_item_field">-</button> <button class='btn btn-info' id="add_menu_item_field">+</button></p>
+  </div>
 
   <div>
     <%= f.submit :id => 'restaurantSubmit' %>
