@@ -1,10 +1,10 @@
-# Restaurant Planner
+# PlanEat
 
 This is an tool designed for food explorers who would like an easier way to keep track of their future restaurant plans. Use this tool to record restaurants you would like to eat at, along with the specific menu items you would like to try. Browse by restaurants or by menu item! Restaurants can be sorted by borough, and menu items can be sorted by price. Users are also able to save important details such as address, phone, and cuisine.
 
 ## Installation
-1. Clone or download Restaurant Planner.
-2. Navigate to Restaurant Planner's folder in your Terminal
+1. Clone or download PlanEat.
+2. Navigate to PlanEat's folder in your Terminal
 3. Run `bundle install`
 4. Run `rails s`
 5. Open the resulting url in your internet browser.
